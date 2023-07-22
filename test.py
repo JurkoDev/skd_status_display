@@ -14,7 +14,6 @@ CLIENTS = set()
 async def echo(websocket):
     CLIENTS.add(websocket)
     async for message in websocket:
-        websockets.broadcast(CLIENTS, message)
         temp = json.loads(message)
         asyncio.create_task(youtube_dl_run(temp))
 
@@ -23,7 +22,17 @@ async def youtube_dl_run(temp):
         type = temp["type"]
         if type == "pin":
             #query the nonexistant db for token
-            jsontemp = json.loads('{"command":"login_response","type":"pin","status":"success","message":"Login success"}')
+            #temp code
+            if temp["pin"] == "1234":
+                jsontemp = json.loads('{"command":"login_response","type":"pin","status":"success","message":"Login success","username":"jozefinka","token":"jozefinka_token"}')
+                websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+                return
+            if temp["pin"] == "123":
+                jsontemp = json.loads('{"command":"login_response","type":"pin","status":"success","message":"Login success","username":"šmikalova","token":"šmikalova_token"}')
+                websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+                return
+            #temp code end
+            jsontemp = json.loads('{"command":"login_response","type":"pin","status":"error","message":"Login failed"}')
             websockets.broadcast(CLIENTS, json.dumps(jsontemp))
         if type == "nfckey":
             #query the nonexistant db for token
@@ -34,19 +43,46 @@ async def youtube_dl_run(temp):
             jsontemp = json.loads('{"command":"login_response","type":"su","status":"success","message":"Login success"}')
             websockets.broadcast(CLIENTS, json.dumps(jsontemp))
     if temp["command"] == "change_status":
-        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
-        jsontemp = json.loads('{"command":"media_play_youtube_audio","link":""}')
-        jsontemp["link"] = streamtemp
+        auth = temp["auth"]
+        state = temp["state"]
+        #query the nonexistant db for state
+        #temp code
+        if auth != "" and auth == "jozefinka_token":
+            #write to the nonexistant db
+            jsontemp = json.loads('{"command":"change_status_response","status":"success","message":"Status changed","state":"","auth":""}')
+            jsontemp["state"] = state
+            jsontemp["auth"] = auth
+            websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+            return
+        #temp code end
+        jsontemp = json.loads('{"command":"change_status_response","status":"error","message":"status not changed"}')
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
     if temp["command"] == "query_status":
-        link = temp["link"]
-        jsontemp = json.loads('{"command":"media_youtube_video_name","note":""}')
-        jsontemp["note"] = streamtemp
+        auth = temp["auth"]
+        # use auth to request state from db
+        #temp code
+        state = "home"
+        if auth != "" and auth == "jozefinka_token":
+            jsontemp = json.loads('{"command":"query_status_response","state":"","auth":""}')
+            jsontemp["auth"] = auth
+            jsontemp["state"] = state
+            websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+            return
+        #temp code end
+        jsontemp = json.loads('{"command":"query_status_response","state":"error","auth":""}')
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
     if temp["command"] == "query_user_info":
-        link = temp["link"]
-        jsontemp = json.loads('{"command":"queue_load_playlist_response","link_array":""}')
-        jsontemp["link_array"] = streamtemp
+        auth = temp["auth"]
+        # use auth to request state from db
+        #temp code
+        if auth != "" and auth == "jozefinka_token":
+            jsontemp = json.loads('{"command":"query_user_info_response","auth":""}')
+            jsontemp["auth"] = auth
+            jsontemp["name"] = name
+            websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+            return
+        #temp code end
+        jsontemp = json.loads('{"command":"query_user_info_response","username":"error","auth":""}')
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
     if temp["command"] == "query_users":
         link = temp["link"]
