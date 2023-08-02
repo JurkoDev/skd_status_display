@@ -30,10 +30,10 @@ export default async function UsersTable({ users }: { users: User[] }) {
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
             <TableCell>
-              <Text>{user.username}</Text>
+              <Text>{user.name}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{user.name}</Text>
             </TableCell>
           </TableRow>
         ))}

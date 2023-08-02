@@ -1,79 +1,57 @@
-'use client';
+"use client";
 
-import { Card, Metric, Text, Title, BarList, Flex, Grid } from '@tremor/react';
-import Chart from './chart';
-
-const website = [
-  { name: '/home', value: 1230 },
-  { name: '/contact', value: 751 },
-  { name: '/gallery', value: 471 },
-  { name: '/august-discount-offer', value: 280 },
-  { name: '/case-studies', value: 78 }
-];
-
-const shop = [
-  { name: '/home', value: 453 },
-  { name: '/imprint', value: 351 },
-  { name: '/shop', value: 271 },
-  { name: '/pricing', value: 191 }
-];
-
-const app = [
-  { name: '/shop', value: 789 },
-  { name: '/product-features', value: 676 },
-  { name: '/about', value: 564 },
-  { name: '/login', value: 234 },
-  { name: '/downloads', value: 191 }
-];
+import { Card, Metric, Text, Title, BarList, Flex, Grid } from "@tremor/react";
+import Chart from "./chart";
 
 const data = [
+  { value: "č.3", name: "Smikalova 2.B", april:"Šmikalova", color: "yellow", place: "trieda"},
+  { value: "č.4", name: "Lomen 1.A,C", color: "purple", place: "trieda" },
+  { value: "č.7", name: "Lehutova 1.B,C", april:"Pálenka", color: "pink", place: "skolsky_dvor" },
+  { value: "č.12", name: "Lenčešová 1.D,C", april:"", color: "orange", place: "trieda" },
+];
+
+const places = [
   {
-    category: 'Website',
-    stat: '10,234',
-    data: website
+    category: "Trieda",
+    id: "trieda"
   },
   {
-    category: 'Online Shop',
-    stat: '12,543',
-    data: shop
+    category: "Školsky dvor",
+    id: "skolsky_dvor"
   },
   {
-    category: 'Mobile App',
-    stat: '2,543',
-    data: app
+    category: "zahradka",
+    data: "zahradka"
   }
 ];
+
+const testtext = "zvončeky"
 
 export default function PlaygroundPage() {
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
-        {data.map((item) => (
+        {places.map((item) => (
           <Card key={item.category}>
             <Title>{item.category}</Title>
-            <Flex
-              justifyContent="start"
-              alignItems="baseline"
-              className="space-x-2"
-            >
-              <Metric>{item.stat}</Metric>
-              <Text>Total views</Text>
-            </Flex>
             <Flex className="mt-6">
-              <Text>Pages</Text>
-              <Text className="text-right">Views</Text>
+              <Text>Trieda</Text>
+              <Text className="text-right">{item.id !== "trieda" ? "" : testtext}</Text>
             </Flex>
             <BarList
-              data={item.data}
-              valueFormatter={(number: number) =>
-                Intl.NumberFormat('us').format(number).toString()
-              }
+              data={data.filter(row => row.place === item.id).map(row => {
+                if (item.id === "skolsky_dvor") {
+                  return { ...row, value: "" };
+                }
+                return row;
+              })}
+              color={data.color}
               className="mt-2"
             />
           </Card>
         ))}
       </Grid>
-      <Chart />
+      {/* <Chart /> */}
     </main>
   );
 }

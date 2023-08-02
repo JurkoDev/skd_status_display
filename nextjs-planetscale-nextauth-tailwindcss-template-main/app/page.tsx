@@ -1,5 +1,5 @@
 import { Card, Title, Text } from '@tremor/react';
-import { queryBuilder } from '../lib/planetscale';
+// import { queryBuilder } from '../lib/planetscale';
 import Search from './search';
 import UsersTable from './table';
 
@@ -11,11 +11,7 @@ export default async function IndexPage({
   searchParams: { q: string };
 }) {
   const search = searchParams.q ?? '';
-  const users = await queryBuilder
-    .selectFrom('users')
-    .select(['id', 'name', 'username', 'email'])
-    .where('name', 'like', `%${search}%`)
-    .execute();
+  const users = [{"id":"test1","name":"test user 1"}, {"id":"test2","name":"test user 2"}];
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
