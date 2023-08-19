@@ -99,11 +99,14 @@ async def youtube_dl_run(temp):
         jsontemp = json.loads('{"command":"queue_load_playlist_response","link_array":""}')
         jsontemp["link_array"] = streamtemp
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
-    if temp["command"] == "query_user_info":
-        link = temp["link"]
-        jsontemp = json.loads('{"command":"queue_load_playlist_response","link_array":""}')
-        jsontemp["link_array"] = streamtemp
+
+
+    if temp["command"] == "data":
+        jsontemp = json.loads('{"command":"data_response","data":"","placing":""}')
+        jsontemp["data"] = [{ "value": "č.3", "name": "Smikalova 2.B", "april":"Šmikalova", "color": "yellow", "place": "trieda"},{ "value": "č.4", "name": "Lomen 1.A,C", "april":"", "color": "purple", "place": "trieda" },{ "value": "č.7", "name": "Lehutova 1.B,C", "april":"Pálenka", "color": "pink", "place": "trieda" },{ "value": "č.12", "name": "Lenčešová 1.D,C", "april":"", "color": "orange", "place": "trieda" },] 
+        jsontemp["places"] = [{"category": "Trieda","id": "trieda"},{"category": "Školsky dvor","id": "skolsky_dvor"},{"category": "Zahradka","id": "zahradka"}]
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+    websockets.broadcast(CLIENTS, json.dumps(temp))
 
 
 
