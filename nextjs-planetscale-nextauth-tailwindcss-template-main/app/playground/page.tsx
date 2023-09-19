@@ -4,38 +4,40 @@ import { useState, useEffect } from "react";
 import { Card, Metric, Text, Title, BarList, Flex, Grid } from "@tremor/react";
 import { useWebSocket } from "./websocket";
 
-var data = [
-  { value: "č.3", name: "Smikalova 2.B", april:"Šmikalova", color: "yellow", place: "trieda"},
-  { value: "č.4", name: "Lomen 1.A,C", april:"", color: "purple", place: "trieda" },
-  { value: "č.7", name: "Lehutova 1.B,C", april:"Pálenka", color: "pink", place: "zahradka" },
-  { value: "č.12", name: "Lenčešová 1.D,C", april:"", color: "orange", place: "trieda" },
-];
+// var data = [
+//   { value: "č.3", name: "Smikalova 2.B", april:"Šmikalova", color: "yellow", place: "trieda"},
+//   { value: "č.4", name: "Lomen 1.A,C", april:"", color: "purple", place: "trieda" },
+//   { value: "č.7", name: "Lehutova 1.B,C", april:"Pálenka", color: "pink", place: "zahradka" },
+//   { value: "č.12", name: "Lenčešová 1.D,C", april:"", color: "orange", place: "trieda" },
+// ];
 
-var places = [
-  {
-    category: "Trieda",
-    id: "trieda"
-  },
-  {
-    category: "Školsky dvor",
-    id: "skolsky_dvor"
-  },
-  {
-    category: "Zahradka",
-    id: "zahradka"
-  }
-];
-
+// var places = [
+//   {
+//     category: "Trieda",
+//     id: "trieda"
+//   },
+//   {
+//     category: "Školsky dvor",
+//     id: "skolsky_dvor"
+//   },
+//   {
+//     category: "Zahradka",
+//     id: "zahradka"
+//   }
+// ];
+export var data = [];
 
 
 export default function PlaygroundPage() {
-  var { data, places, connectWebSocket } = useWebSocket();
+  var { data: datatemp, places, connectWebSocket } = useWebSocket();
 
   useEffect(() => {
     const unsubscribe = connectWebSocket();
 
     return unsubscribe;
   }, []);
+
+  data = datatemp;
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">

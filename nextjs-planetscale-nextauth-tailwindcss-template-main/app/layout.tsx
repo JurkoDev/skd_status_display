@@ -19,10 +19,10 @@ export default async function RootLayout({
     <html lang="en" className="h-full bg-gray-50">
       <body className="h-full">
         <Suspense>
-          <Nav />
+          {/* <Nav /> */}
         </Suspense>
         {children}
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   );

@@ -5,10 +5,25 @@ import asyncio
 # import ssl
 import websockets
 import json
+import yaml
 
 # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 # localhost_pem = pathlib.Path(__file__).with_name("localhost.pem")
 # ssl_context.load_cert_chain(localhost_pem)
+
+data = []
+places = []
+pin = []
+
+with open('config.yaml', 'r', encoding='utf8',) as file:
+    configuration = yaml.safe_load(file)
+    data = configuration["data"]
+    places = configuration["places"]
+    pin = configuration["pin"]
+    print("yaml loaded")
+
+# data = [{ "value": "č.3", "name": "Smikalova 2.B", "april":"Šmikalova", "color": "yellow", "place": "trieda"},{ "value": "č.4", "name": "Lomen 1.A,C", "april":"", "color": "purple", "place": "trieda" },{ "value": "č.7", "name": "Lehutova 1.B,C", "april":"Pálenka", "color": "pink", "place": "trieda" },{ "value": "č.12", "name": "Lenčešová 1.D,C", "april":"", "color": "orange", "place": "trieda" },] 
+# places = [{"category": "Trieda","id": "trieda"},{"category": "Školsky dvor","id": "skolsky_dvor"},{"category": "Zahradka","id": "zahradka"}]
 
 CLIENTS = set()
 async def echo(websocket):
@@ -42,7 +57,7 @@ async def youtube_dl_run(temp):
             #query the nonexistant db for token
             jsontemp = json.loads('{"command":"login_response","type":"su","status":"success","message":"Login success"}')
             websockets.broadcast(CLIENTS, json.dumps(jsontemp))
-    if temp["command"] == "change_status":
+    if temp["command"] == "change_status_commentout":
         auth = temp["auth"]
         state = temp["state"]
         #query the nonexistant db for state
@@ -100,12 +115,55 @@ async def youtube_dl_run(temp):
         jsontemp["link_array"] = streamtemp
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
 
+    if temp["command"] == "user_login":
+        jsontemp = json.loads('{"command":"user_login_response","admin":false}')
+
+        #get the id of the pin (var temp["pin"]) from var array pin
+        for i in range(len(pin)):
+            if pin[i]["pin"] == int(temp["pin"]):
+                jsontemp["id"] = pin[i]["id"]
+                jsontemp["admin"] = pin[i]["admin"]
+
+
+        # match temp["pin"]:
+        #     case "616263":
+        #         jsontemp["user"] = "adam"
+        #         jsontemp["admin"] = True
+        #     case "515253":
+        #         jsontemp["user"] = "Smikalova 2.B"
+        #     case "414243":
+        #         jsontemp["user"] = "Lomen 1.A,C"
+        
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+
 
     if temp["command"] == "data":
         jsontemp = json.loads('{"command":"data_response","data":"","placing":""}')
-        jsontemp["data"] = [{ "value": "č.3", "name": "Smikalova 2.B", "april":"Šmikalova", "color": "yellow", "place": "trieda"},{ "value": "č.4", "name": "Lomen 1.A,C", "april":"", "color": "purple", "place": "trieda" },{ "value": "č.7", "name": "Lehutova 1.B,C", "april":"Pálenka", "color": "pink", "place": "trieda" },{ "value": "č.12", "name": "Lenčešová 1.D,C", "april":"", "color": "orange", "place": "trieda" },] 
-        jsontemp["places"] = [{"category": "Trieda","id": "trieda"},{"category": "Školsky dvor","id": "skolsky_dvor"},{"category": "Zahradka","id": "zahradka"}]
+        jsontemp["data"] = data
+        jsontemp["places"] = places
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+
+        websockets.broadcast(CLIENTS, json.dumps(json.loads('{"command":"user_login_update"}')))
+    if temp["command"] == "data_write":
+        tempname = temp["name"]
+        tempplace = temp["place"]
+
+        # find in array data a dictionary where var tempname matches name then set the value of place to var tempplace
+        #temp code
+        for i in range(len(data)):
+            if data[i]["name"] == tempname:
+                data[i]["place"] = tempplace
+        #temp code end
+
+
+        jsontemp = json.loads('{"command":"data_write_response"}')
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+
+        jsontemp = json.loads('{"command":"data_response","data":"","placing":""}')
+        jsontemp["data"] = data
+        jsontemp["places"] = places
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+
     websockets.broadcast(CLIENTS, json.dumps(temp))
 
 
@@ -115,4 +173,5 @@ async def main():
         await asyncio.Future()  # run forever
 
 if __name__ == "__main__":
+    print("starting server")
     asyncio.run(main())

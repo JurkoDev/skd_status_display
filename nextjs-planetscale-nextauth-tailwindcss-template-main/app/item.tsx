@@ -1,7 +1,11 @@
+/* eslint-disable typescript:S1774 */
 'use client';
 
-import { Card, Text, Title, SearchSelect, SearchSelectItem } from "@tremor/react";
-import { searchselectws } from "./searchselectws";
+import { Card, Text, Title, SearchSelect, SearchSelectItem, Table, TableHead, TableRow, TableHeaderCell, TableBody, Grid, Button, TextInput } from "@tremor/react";
+import { useEffect, useState } from "react";
+import { useWebSocket } from "./websocket";
+import React from "react";
+
 
 interface Item {
     value: string;
@@ -11,36 +15,48 @@ interface Item {
     place: string;
 }
 
-var data: Item[]
+var ws: WebSocket;
+export default function Item() {
+    const { data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, connectWebSocket } = useWebSocket();
+    const pinInput = React.createRef();
 
-export default function select_item() {
-    const ws = new WebSocket("ws://localhost:8765");
-    ws.onopen = () => {
-      ws.send(JSON.stringify({ command: "data" }));
-    };
 
-    ws.onmessage = (event) => {
-      var message = JSON.parse(event.data);
-      if (message.command === "data_response") {
-        data = message.data
-      }
-    };
+    useEffect(() => { const { unsubscribe } = connectWebSocket(); ws = connectWebSocket().ws; return unsubscribe; }, []);
+
     return (
-        {data.map((item) => (data.filter(row => row.place === item.id) == "" ? "" :
-        <Card className="mlectt-8">
-            <Title>Performance</Title>
-            <Text>{data.name}</Text>
-            <SearchSelect onValueChange={searchselectws}>
-                <SearchSelectItem value="zahradka">
-                    zahradka
-                </SearchSelectItem>
-                <SearchSelectItem value="skolsky_dvor">
-                    skolsky dvor
-                </SearchSelectItem>
-                <SearchSelectItem value="trieda">
-                    trieda
-                </SearchSelectItem>
-            </SearchSelect>
-        </Card>))}
+        <div>
+            {/* {state == "main" ? <p>Ahoj {user}</p> : ""} */}
+            {state == "" ? <Card className="mlectt-8">
+                <Title>Loading</Title>
+            </Card> : ""}
+            {state == "main" ? <Card className="mlectt-8">
+                <Title style={{ marginBottom: '16px' }}>Ahoj {user}</Title>
+
+                <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
+                    {places.map((item) => (
+                        <Button color="blue" onClick={() => dataupdate(item, ws)}>{item.category}</Button>
+                    ))}
+                </Grid>
+            </Card> : ""}
+            {state == "login" ? <Card className="mlectt-8">
+                <Title style={{ marginBottom: '16px' }}>prihlas sa</Title>
+                <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
+                    <TextInput type="number" ref={pinInput} />
+                    <Button color="blue" onClick={() => login(ws, pinInput)}>Prihlasiť</Button>
+                </Grid>
+            </Card> : ""}
+            {state == "user_select" ? <div>
+                <Card className="mlectt-8">
+                    <Title style={{ marginBottom: '20px' }}>select user</Title>
+
+                    <Grid numItemsSm={3} numItemsLg={4} className="gap-6">
+                        {data.map((item) => (
+                            <Button color={item.color} onClick={() => userselectclick(item)}>{item.name}</Button>
+                        ))}
+                    </Grid>
+                </Card>
+            </div> : ""}
+            <Button color="red" onClick={() => userreset()}>reset</Button>
+        </div >
     );
 }
