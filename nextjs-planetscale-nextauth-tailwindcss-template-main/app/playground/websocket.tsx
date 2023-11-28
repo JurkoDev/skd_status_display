@@ -5,8 +5,8 @@ export function useWebSocket() {
   var [places, setPlaces] = useState([]);
 
   const connectWebSocket = () => {
-    // const ws = new WebSocket("ws://localhost:8765");
-    const ws = new WebSocket("wss://bm7247ff-8765.euw.devtunnels.ms/");
+    const ws = new WebSocket("ws://localhost:8765");
+    // const ws = new WebSocket("wss://bm7247ff-8765.euw.devtunnels.ms/");
     ws.onopen = () => {
       ws.send(JSON.stringify({ command: "data" }));
     };

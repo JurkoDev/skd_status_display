@@ -1,75 +1,87 @@
 data:
   - id: 3
     value: č.3
-    name: Smikalova 3.B
+    name: Smikalova
+    trieda: 3.B
     april: Šmikalova
-    color: yellow
+    color: gray
     place: trieda
   - id: 4
     value: č.4
-    name: Lomen 2.A
+    name: Lomen
+    trieda: 2.A
     april:
-    color: purple
+    color: orange
     place: trieda
   - id: 5
     value: č.7
-    name: Lehutova 2.B
+    name: Lehutova
+    trieda: 2.B
     april: Pálenka
-    color: pink
+    color: purple
     place: trieda
   - id: 6
     value: č.12
-    name: Lenčešová 2.C
+    name: Lenčešová
+    trieda: 2.C
     april:
-    color: orange
+    color: stone
     place: trieda 
   - id: 7
     value: č.5
-    name: Supeková 1.A
+    name: Supeková
+    trieda: 1.A
     april:
-    color: blue
+    color: yellow
     place: trieda
   - id: 8
     value: č.6
-    name: Turoci 1.C
+    name: Turoci
+    trieda: 1.C
     april:
-    color: blue
+    color: green
     place: trieda
   - id: 9
     value: č.8
-    name: Tureková 3.C
+    name: Tureková
+    trieda: 3.C
     april:
-    color: blue
+    color: pink
     place: trieda
   - id: 10
     value: č.9
-    name: Komjatová 4.B,C
+    name: Komjatová
+    trieda: 4.B,C
     april:
-    color: blue
+    color: amber
     place: trieda
   - id: 11
     value: č.10
-    name: Brunclíková 1.D
+    name: Brunclíková
+    trieda: 1.D
     april:
-    color: blue
+    color: violet
     place: trieda
   - id: 12
     value: č.11
-    name: Slováková 1.B
+    name: Slováková
+    trieda: 1.B
     april:
-    color: blue
+    color: red
     place: trieda
   - id: 13
     value: č.13
-    name: Srnec 4.A,C
+    name: Srnec
+    trieda: 4.A,C
     april:
-    color: blue
+    color: sky
     place: trieda
   - id: 14
     value: č.16
-    name: Urbanová 3.A
+    name: Urbanová
+    trieda: 3.A
     april:
-    color: blue
+    color: fuchsia
     place: trieda
 pin:
   - id: 1
@@ -81,12 +93,34 @@ pin:
   - id: 3
     pin: 515253
     admin: false
+  - id: 4
+    pin: 515254
+    admin: false
+  - id: 5
+    pin: 515255
+    admin: false
+  - id: 6
+    pin: 515256
+    admin: false 
+  - id: 7
+    pin: 515257
+    admin: false
+  - id: 8
+    pin: 515258
+    admin: false
+  - id: 9
+    pin: 515259
+    admin: false
 places:
   - category: Trieda
     id: trieda
-  - category: Školsky dvor zozadu
+  - category: Školsky dvor
     id: skolsky_dvor
-  - category: Školsky dvor z boku
-    id: skolsky_dvor_bok
+  # - category: Školsky dvor z boku
+  #   id: skolsky_dvor_bok
   - category: Zahradka
     id: zahradka
+  - category: Ihrisko pri záhradke
+    id: ihrisko
+  - category: telocvicna
+    id: telocvicna

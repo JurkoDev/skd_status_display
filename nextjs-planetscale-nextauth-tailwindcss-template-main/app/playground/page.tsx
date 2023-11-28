@@ -52,9 +52,9 @@ export default function PlaygroundPage() {
             <BarList
               data={data.filter(row => row.place === item.id).map(row => {
                 if (item.id !== "trieda") {
-                  return { ...row, value: "" };
+                  return {name: row.name + " " + row.trieda, value: "" , color: row.color};
                 }
-                return row;
+                return {name: row.name + " " + row.trieda, value: row.value, color: row.color};
               })}
               color={data.color}
               className="mt-2"

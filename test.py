@@ -117,6 +117,7 @@ async def youtube_dl_run(temp):
 
     if temp["command"] == "user_login":
         jsontemp = json.loads('{"command":"user_login_response","admin":false}')
+        jsontemp["session"] = temp["session"]
 
         #get the id of the pin (var temp["pin"]) from var array pin
         for i in range(len(pin)):
@@ -135,6 +136,7 @@ async def youtube_dl_run(temp):
         #         jsontemp["user"] = "Lomen 1.A,C"
         
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+        # websockets.send(json.dumps(jsontemp))
 
 
     if temp["command"] == "data":
@@ -145,15 +147,13 @@ async def youtube_dl_run(temp):
 
         websockets.broadcast(CLIENTS, json.dumps(json.loads('{"command":"user_login_update"}')))
     if temp["command"] == "data_write":
-        tempname = temp["name"]
-        tempplace = temp["place"]
+        tempid = temp["id"]
 
         # find in array data a dictionary where var tempname matches name then set the value of place to var tempplace
-        #temp code
+
         for i in range(len(data)):
-            if data[i]["name"] == tempname:
-                data[i]["place"] = tempplace
-        #temp code end
+            if data[i]["id"] == tempid:
+                data[i]["place"] = temp["place"]
 
 
         jsontemp = json.loads('{"command":"data_write_response"}')
@@ -164,7 +164,7 @@ async def youtube_dl_run(temp):
         jsontemp["places"] = places
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
 
-    websockets.broadcast(CLIENTS, json.dumps(temp))
+    # websockets.broadcast(CLIENTS, json.dumps(temp))
 
 
 

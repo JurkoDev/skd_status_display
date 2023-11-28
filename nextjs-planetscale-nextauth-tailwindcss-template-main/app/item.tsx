@@ -17,12 +17,16 @@ interface Item {
 
 var ws: WebSocket;
 export default function Item() {
-    const { data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, connectWebSocket } = useWebSocket();
+    const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, connectWebSocket } = useWebSocket();
     const pinInput = React.createRef();
 
 
-    useEffect(() => { const { unsubscribe } = connectWebSocket(); ws = connectWebSocket().ws; return unsubscribe; }, []);
+    useEffect(() => {
+        var temp = connectWebSocket();
+        return temp.unsubscribe;
+    }, []);
 
+    
     return (
         <div>
             {/* {state == "main" ? <p>Ahoj {user}</p> : ""} */}
@@ -34,7 +38,7 @@ export default function Item() {
 
                 <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
                     {places.map((item) => (
-                        <Button color="blue" onClick={() => dataupdate(item, ws)}>{item.category}</Button>
+                        <Button color="blue" onClick={() => dataupdate(item, ws, userid)}>{item.category}</Button>
                     ))}
                 </Grid>
             </Card> : ""}
