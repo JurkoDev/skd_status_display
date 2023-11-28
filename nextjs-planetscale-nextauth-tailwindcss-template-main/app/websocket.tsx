@@ -2,13 +2,14 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { unsubscribe } from "diagnostics_channel";
-import { any, element } from "prop-types";
+import { any, element, number, string } from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { pinError } from './item';
 
 export function useWebSocket() {
 
-  var [data, setData] = useState([]);
-  var [places, setPlaces] = useState([]);
+  var [data, setData] = useState([{id: number, value:string, name:string, april:string, color:string, place:string}]);
+  var [places, setPlaces] = useState([{category:string, id:string}]);
   var [state, setState] = useState("");
   var [user, setUser] = useState("");
   var [userid, setUserid] = useState("");
@@ -26,6 +27,7 @@ export function useWebSocket() {
       if (message.command === "user_login_response") {
         // if id is not defined return
         if (message.id == null) {
+          pinError.current.innerHTML = "Nesprávny pin";
           return;
         }
         if (message.session !== session) {
@@ -44,7 +46,7 @@ export function useWebSocket() {
               setUserid(message.id);
               setState("main");
             }
-          })
+          });
         }
       }
     };
@@ -102,5 +104,5 @@ export function useWebSocket() {
   };
 
 
-  return {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, connectWebSocket };
+  return { ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, connectWebSocket };
 }

@@ -25,23 +25,23 @@ import { useWebSocket } from "./websocket";
 //     id: "zahradka"
 //   }
 // ];
-export var data = [];
+
 
 
 export default function PlaygroundPage() {
-  var { data: datatemp, places, connectWebSocket } = useWebSocket();
+  var { data, places, connectWebSocket } = useWebSocket();
 
   useEffect(() => {
     const unsubscribe = connectWebSocket();
 
     return unsubscribe;
-  }, []);
+  }, [connectWebSocket]);
 
-  data = datatemp;
-
+  // data = datatemp;
+  // main class originaly "p-4 md:p-10 mx-auto max-w-7xl"
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
+    <main className="p-4 md:p-10 mx-auto"> 
+      <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
         {places.map((item) => (data.filter(row => row.place === item.id) == "" ? "" :
           <Card key={item.category}>
             <Title>{item.category}</Title>

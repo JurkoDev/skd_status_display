@@ -1,9 +1,10 @@
+import { number, string } from "prop-types";
 import { useState } from "react";
 
 export function useWebSocket() {
-  var [data, setData] = useState([]);
-  var [places, setPlaces] = useState([]);
-
+  var [data, setData] = useState([{id: number, value:string, name:string, april:string, color:string, place:string}]);
+  var [places, setPlaces] = useState([{category:string, id:string}]);
+  
   const connectWebSocket = () => {
     const ws = new WebSocket("ws://localhost:8765");
     // const ws = new WebSocket("wss://bm7247ff-8765.euw.devtunnels.ms/");
