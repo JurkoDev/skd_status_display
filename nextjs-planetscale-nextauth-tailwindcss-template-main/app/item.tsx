@@ -15,10 +15,10 @@ interface Item {
 }
 
 var ws: WebSocket;
-export const pinError = React.createRef();
+export const pinError = React.createRef<HTMLParagraphElement>();
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, connectWebSocket } = useWebSocket();
-    const pinInput = React.createRef();
+    const pinInput = React.createRef<HTMLInputElement>();
 
 
     useEffect(() => {
