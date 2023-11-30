@@ -40,7 +40,7 @@ export default function Item() {
 
                 <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
                     {places.map((item, index) => (
-                        <Button key={index} color="blue" onClick={() => dataupdate(item, ws, userid)}>{item.category}</Button>
+                        <Button key={index} color="blue" onClick={() => dataupdate(item, ws, userid)}>{item.category.toString()}</Button>
                     ))}
                 </Grid>
             </Card> : ""}
@@ -58,7 +58,7 @@ export default function Item() {
 
                     <Grid numItemsSm={3} numItemsLg={4} className="gap-6">
                         {data.map((item,index) => (
-                            <Button key={index} color={item.color} onClick={() => userselectclick(item)}>{item.name}</Button>
+                            <Button key={index} color={item.color} onClick={() => userselectclick(item)}>{item.name.toString()}</Button>
                         ))}
                     </Grid>
                 </Card>
