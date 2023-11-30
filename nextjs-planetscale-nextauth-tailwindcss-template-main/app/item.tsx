@@ -47,7 +47,7 @@ export default function Item() {
             {state == "login" ? <Card className="mlectt-8">
                 <Title style={{ marginBottom: '16px' }}>prihlas sa</Title>
                 <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
-                    <TextInput type="number" ref={pinInput} />
+                    <TextInput type="text" ref={pinInput} />
                     <Button color="blue" onClick={() => login(ws, pinInput)}>Prihlasiť</Button>
                 </Grid>
                 <Text color="red" ref={pinError}></Text>
