@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Requireable } from "react";
-import { Card, Metric, Text, Title, BarList, Flex, Grid } from "@tremor/react";
+import { Card, Metric, Text, Title, BarList, Flex, Grid, Color, ValueFormatter } from "@tremor/react";
 import { useWebSocket } from "./websocket";
 
 // var data = [
@@ -40,29 +40,33 @@ export default function PlaygroundPage() {
   // data = datatemp;
   // main class originaly "p-4 md:p-10 mx-auto max-w-7xl"
   return (
+    <>
     <main className="p-4 md:p-10 mx-auto"> 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
         {places.map((item) => (data.filter(row => row.place === item.id).length === 0 ? "" :
-          <Card key={item.category}>
-            <Title>{item.category}</Title>
+          <Card key={item.category.toString()}>
+            <Title>{item.category.toString()}</Title>
             <Flex className="mt-6">
               <Text>Trieda</Text>
-              <Text className="text-right">{item.id !== "trieda" ? "" : "Zvoniť"}</Text>
+              <Text className="text-right">{item.id.toString() !== "trieda" ? "" : "Zvoniť"}</Text>
             </Flex>
             <BarList
+            /* eslint-disable */
               data={data.filter(row => row.place === item.id).map(row => {
-                if (item.id !== "trieda") {
-                  return {name: row.name + " " + row.trieda, value: "" , color: row.color};
+                if (item.id.toString() !== "trieda") {
+                  return { name: row.name + " " + row.trieda, value: 0, color: row.color as unknown as Color};
+                } else {
+                  return { name: row.name + " " + row.trieda, value: row.value, color: row.color as unknown as Color};
                 }
-                return {name: row.name + " " + row.trieda, value: row.value, color: row.color};
               })}
-              color={data.color}
               className="mt-2"
+            /* eslint-enable */
             />
           </Card>
         ))}
       </Grid>
       {/* <Chart /> */}
     </main>
+    </>
   );
 }
