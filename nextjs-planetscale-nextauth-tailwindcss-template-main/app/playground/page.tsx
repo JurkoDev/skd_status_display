@@ -40,7 +40,6 @@ export default function PlaygroundPage() {
   // data = datatemp;
   // main class originaly "p-4 md:p-10 mx-auto max-w-7xl"
   return (
-    <>
     <main className="p-4 md:p-10 mx-auto"> 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
         {places.map((item) => (data.filter(row => row.place === item.id).length === 0 ? "" :
@@ -52,11 +51,11 @@ export default function PlaygroundPage() {
             </Flex>
             <BarList
             /* eslint-disable */
-              data={data.filter(row => row.place === item.id).map(row => {
+              data={data.filter(row => row.place === item.id).map((row) => {
                 if (item.id.toString() !== "trieda") {
-                  return { name: row.name + " " + row.trieda, value: 0, color: row.color as unknown as Color};
+                  return { name: row.name + " " + row.trieda, value: "", color: row.color};
                 } else {
-                  return { name: row.name + " " + row.trieda, value: row.value, color: row.color as unknown as Color};
+                  return { name: row.name + " " + row.trieda, value: row.value, color: row.color};
                 }
               })}
               className="mt-2"
@@ -67,6 +66,5 @@ export default function PlaygroundPage() {
       </Grid>
       {/* <Chart /> */}
     </main>
-    </>
   );
 }
