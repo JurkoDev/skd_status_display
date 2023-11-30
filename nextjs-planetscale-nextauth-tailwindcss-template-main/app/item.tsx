@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Text, Title, SearchSelect, SearchSelectItem, Table, TableHead, TableRow, TableHeaderCell, TableBody, Grid, Button, TextInput } from "@tremor/react";
+import { Card, Text, Title, SearchSelect, SearchSelectItem, Table, TableHead, TableRow, TableHeaderCell, TableBody, Grid, Button, TextInput, Color } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { useWebSocket } from "./websocket";
 import React from "react";
@@ -58,7 +58,7 @@ export default function Item() {
 
                     <Grid numItemsSm={3} numItemsLg={4} className="gap-6">
                         {data.map((item,index) => (
-                            <Button key={index} color={item.color} onClick={() => userselectclick(item)}>{item.name.toString()}</Button>
+                            <Button key={index} color={item.color as unknown as Color} onClick={() => userselectclick(item)}>{item.name.toString()}</Button>
                         ))}
                     </Grid>
                 </Card>
