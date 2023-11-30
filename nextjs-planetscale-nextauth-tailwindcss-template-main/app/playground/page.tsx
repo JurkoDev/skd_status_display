@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Requireable } from "react";
 import { Card, Metric, Text, Title, BarList, Flex, Grid } from "@tremor/react";
 import { useWebSocket } from "./websocket";
 
@@ -42,7 +42,7 @@ export default function PlaygroundPage() {
   return (
     <main className="p-4 md:p-10 mx-auto"> 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
-        {places.map((item) => (data.filter(row => row.place === item.id) == "" ? "" :
+        {places.map((item) => (data.filter(row => row.place === item.id).length === 0 ? "" :
           <Card key={item.category}>
             <Title>{item.category}</Title>
             <Flex className="mt-6">
