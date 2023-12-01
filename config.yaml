@@ -124,3 +124,5 @@ places:
     id: ihrisko
   - category: telocvicna
     id: telocvicna
+  - category: herna
+    id: herna
