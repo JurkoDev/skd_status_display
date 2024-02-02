@@ -49,7 +49,7 @@ export default function PlaygroundPage() {
           <Card key={item.category.toString()}>
             <Title>{item.category.toString()}</Title>
             <Flex className="mt-6">
-              <Text>Trieda</Text>
+              <Text></Text>
               <Text className="text-right">{item.id.toString() == "trieda" || item.id.toString() == "herna" ? "Zvoniť" : ""}</Text>
             </Flex>
             <BarList
