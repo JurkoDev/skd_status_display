@@ -19,7 +19,7 @@ export const pinError = React.createRef<HTMLParagraphElement>();
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket } = useWebSocket();
     const pinInput = React.createRef<HTMLInputElement>();
-    const customMessage = React.createRef<HTMLParagraphElement>();
+    const customMessage = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
         var temp = connectWebSocket();
