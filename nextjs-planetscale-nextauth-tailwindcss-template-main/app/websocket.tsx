@@ -93,7 +93,7 @@ export function useWebSocket() {
     }
   };
 
-  const login = (ws: { send: (arg0: string) => void; }, pinInput: { current: { value: any; }; }) => {
+  const login = (ws: any, pinInput: { current: { value: any; }; }) => {
     ws.send(JSON.stringify({ command: "user_login", "pin": pinInput.current.value, "session": session }));
   };
 
