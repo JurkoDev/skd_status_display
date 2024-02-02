@@ -3,7 +3,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { unsubscribe } from "diagnostics_channel";
 import { any, element, number, string } from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import { pinError } from './item';
 
 export function useWebSocket() {
@@ -54,7 +54,7 @@ export function useWebSocket() {
   }, [data, session]);
 
   const connectWebSocket = () => {
-    const ws = new WebSocket("ws://192.168.5.160:8765");
+    const ws = new WebSocket("ws://skd.zsdudova.sk:8765");
     // const ws = new WebSocket("wss://bm7247ff-8765.euw.devtunnels.ms/");
     setWs(ws);
     ws.onopen = () => {
@@ -78,13 +78,13 @@ export function useWebSocket() {
     return { unsubscribe, ws }
   };
 
-  const userselectclick = (item) => {
+  const userselectclick = (item: { name: SetStateAction<string>; id: SetStateAction<string>; }) => {
     setUser(item.name);
     setUserid(item.id);
     setState("main");
   };
 
-  const dataupdate = (item, ws, userid) => {
+  const dataupdate = (item: { id: any; }, ws: { send: (arg0: string) => void; }, userid: any) => {
     ws.send(JSON.stringify({ command: "data_write", "id": userid, "name": user, "place": item.id }));
     if (adminuser == true) {
       setState("user_select");
@@ -93,7 +93,7 @@ export function useWebSocket() {
     }
   };
 
-  const login = (ws, pinInput) => {
+  const login = (ws: { send: (arg0: string) => void; }, pinInput: { current: { value: any; }; }) => {
     ws.send(JSON.stringify({ command: "user_login", "pin": pinInput.current.value, "session": session }));
   };
 
@@ -103,6 +103,11 @@ export function useWebSocket() {
     setState("login");
   };
 
+  const registerCustomPlace = (ws: { send: (arg0: string) => void; }, userid: any, reference: { current: { value: any; }; }) => {	
+    ws.send(JSON.stringify({ command: "register_custom_place", "id": userid, "place": reference.current.value }));	
+    reference.current.value = "";
+  }
 
-  return { ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, connectWebSocket };
+
+  return { ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket };
 }
