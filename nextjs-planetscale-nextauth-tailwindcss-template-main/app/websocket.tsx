@@ -84,7 +84,7 @@ export function useWebSocket() {
     setState("main");
   };
 
-  const dataupdate = (item: { id: any; }, ws: { send: (arg0: string) => void; }, userid: any) => {
+  const dataupdate = (item: { id: any; }, ws: any, userid: any) => {
     ws.send(JSON.stringify({ command: "data_write", "id": userid, "name": user, "place": item.id }));
     if (adminuser == true) {
       setState("user_select");
