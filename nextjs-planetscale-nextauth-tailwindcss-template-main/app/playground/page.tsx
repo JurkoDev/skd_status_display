@@ -42,7 +42,7 @@ export default function PlaygroundPage() {
   return (
     <main className="p-4 md:p-10 mx-auto"> 
       <div className="bg-red-500 text-white p-4">
-        <h1 className="text-center">Udaje nemusia byt platne</h1>
+        <h1 className="text-center">Testovacia prevádzka: Údaje nemusia byť správne</h1>
       </div>
       <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
         {places.map((item) => (data.filter(row => row.place === item.id).length === 0 ? "" :
