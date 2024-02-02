@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { unsubscribe } from "diagnostics_channel";
 import { any, element, number, string } from "prop-types";
 import { SetStateAction, useEffect, useRef, useState } from "react";
-import { pinError } from './item';
+import { customMessage, pinError } from './item';
 
 export function useWebSocket() {
 
@@ -103,9 +103,9 @@ export function useWebSocket() {
     setState("login");
   };
 
-  const registerCustomPlace = (ws: any, userid: any, reference: { current: { value: any; }; }) => {	
-    ws.send(JSON.stringify({ command: "data_write_custom_place", "id": userid, "place": reference.current.value }));	
-    reference.current.value = "";
+  const registerCustomPlace = (ws: any, userid: any) => {	
+    ws.send(JSON.stringify({ command: "data_write_custom_place", "id": userid, "place": customMessage.current.value }));	
+    customMessage.current.value = "";
   }
 
 

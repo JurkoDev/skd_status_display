@@ -16,10 +16,10 @@ interface Item {
 
 var ws: WebSocket;
 export const pinError = React.createRef<HTMLParagraphElement>();
+export const customMessage = React.createRef<HTMLInputElement>();
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket } = useWebSocket();
     const pinInput = React.createRef<HTMLInputElement>();
-    const customMessage = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
         var temp = connectWebSocket();
@@ -46,7 +46,7 @@ export default function Item() {
                 <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
                     <Title>Custom Place</Title>
                     <TextInput type="text" ref={customMessage} />
-                    <Button color="blue" onClick={() => registerCustomPlace(ws, userid, customMessage)}>Submit</Button>
+                    <Button color="blue" onClick={() => registerCustomPlace(ws, userid)}>Submit</Button>
                 </Grid>
             </Card> : ""}
             {state == "login" ? <Card className="mlectt-8">
