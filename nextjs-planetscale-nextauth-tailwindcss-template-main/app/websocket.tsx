@@ -103,7 +103,7 @@ export function useWebSocket() {
     setState("login");
   };
 
-  const registerCustomPlace = (ws: { send: (arg0: string) => void; }, userid: any, reference: { current: { value: any; }; }) => {	
+  const registerCustomPlace = (ws: any, userid: any, reference: { current: { value: any; }; }) => {	
     ws.send(JSON.stringify({ command: "data_write_custom_place", "id": userid, "place": reference.current.value }));	
     reference.current.value = "";
   }
