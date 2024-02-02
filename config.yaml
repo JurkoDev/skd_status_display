@@ -15,14 +15,14 @@ data:
     place: trieda
   - id: 5
     value: č.7
-    name: Lehutova
+    name: Lehutová
     trieda: 2.B
     april: Pálenka
     color: purple
     place: trieda
   - id: 6
     value: č.12
-    name: Lenčešová
+    name: Lenčéšová
     trieda: 2.C
     april:
     color: stone
@@ -57,7 +57,7 @@ data:
     place: trieda
   - id: 11
     value: č.3
-    name: Smikalova
+    name: Smíkalová
     trieda: 3.B
     april: Šmikalova
     color: gray
