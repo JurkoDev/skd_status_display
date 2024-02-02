@@ -163,6 +163,28 @@ async def youtube_dl_run(temp):
         jsontemp["data"] = data
         jsontemp["places"] = places
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+    if temp["command"] == "data_write_custom_place":
+        tempid = temp["id"]
+
+        # find in array data a dictionary where var tempname matches name then set the value of place to var tempplace
+        found = False
+        for i in range(len(places)):
+            if places[i]["id"] == tempid:
+                places[i]["category"] = temp["place"]
+                found = True
+
+        if not found:
+            places.append({"category": temp["place"], "id": tempid})
+
+
+
+        jsontemp = json.loads('{"command":"data_write_custom_place_response"}')
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+
+        jsontemp = json.loads('{"command":"data_response","data":"","placing":""}')
+        jsontemp["data"] = data
+        jsontemp["places"] = places
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
 
     # websockets.broadcast(CLIENTS, json.dumps(temp))
 

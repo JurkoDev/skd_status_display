@@ -1,17 +1,17 @@
 data:
   - id: 3
-    value: č.3
-    name: Smikalova
-    trieda: 3.B
-    april: Šmikalova
-    color: gray
+    value: č.10
+    name: Brunclíková
+    trieda: 1.D
+    april:
+    color: violet
     place: trieda
   - id: 4
-    value: č.4
-    name: Lomen
-    trieda: 2.A
+    value: č.9
+    name: Komjatová
+    trieda: 4.B,C
     april:
-    color: orange
+    color: amber
     place: trieda
   - id: 5
     value: č.7
@@ -49,18 +49,18 @@ data:
     color: pink
     place: trieda
   - id: 10
-    value: č.9
-    name: Komjatová
-    trieda: 4.B,C
+    value: č.4
+    name: Lomen
+    trieda: 2.A
     april:
-    color: amber
+    color: orange
     place: trieda
   - id: 11
-    value: č.10
-    name: Brunclíková
-    trieda: 1.D
-    april:
-    color: violet
+    value: č.3
+    name: Smikalova
+    trieda: 3.B
+    april: Šmikalova
+    color: gray
     place: trieda
   - id: 12
     value: č.11
@@ -118,11 +118,13 @@ places:
     id: skolsky_dvor
   # - category: Školsky dvor z boku
   #   id: skolsky_dvor_bok
-  - category: Zahradka
+  - category: Záhradka
     id: zahradka
   - category: Ihrisko pri záhradke
     id: ihrisko
-  - category: telocvicna
+  - category: Telocvična
     id: telocvicna
-  - category: herna
+  - category: Herňa
     id: herna
+  - category: Školská jedáleň
+    id: jedalen
