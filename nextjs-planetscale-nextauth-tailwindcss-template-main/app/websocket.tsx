@@ -78,7 +78,7 @@ export function useWebSocket() {
     return { unsubscribe, ws }
   };
 
-  const userselectclick = (item: { name: SetStateAction<string>; id: SetStateAction<string>; }) => {
+  const userselectclick = (item: any) => {
     setUser(item.name);
     setUserid(item.id);
     setState("main");
