@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { unsubscribe } from "diagnostics_channel";
 import { any, element, number, string } from "prop-types";
 import { SetStateAction, useEffect, useRef, useState } from "react";
-import { customMessage, pinError } from './item';
+import { customMessage, pinError, pinInput } from './item';
 
 export function useWebSocket() {
 
@@ -93,7 +93,7 @@ export function useWebSocket() {
     }
   };
 
-  const login = (ws: any, pinInput: { current: { value: any; }; }) => {
+  const login = (ws: any) => {
     ws.send(JSON.stringify({ command: "user_login", "pin": pinInput.current.value, "session": session }));
   };
 

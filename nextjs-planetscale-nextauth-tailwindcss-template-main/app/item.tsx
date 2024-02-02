@@ -17,9 +17,9 @@ interface Item {
 var ws: WebSocket;
 export const pinError = React.createRef<HTMLParagraphElement>();
 export const customMessage = React.createRef<HTMLInputElement>();
+export const pinInput = React.createRef<HTMLInputElement>();
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket } = useWebSocket();
-    const pinInput = React.createRef<HTMLInputElement>();
 
     useEffect(() => {
         var temp = connectWebSocket();
@@ -53,7 +53,7 @@ export default function Item() {
                 <Title style={{ marginBottom: '16px' }}>prihlas sa</Title>
                 <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
                     <TextInput type="text" ref={pinInput} />
-                    <Button color="blue" onClick={() => login(ws, pinInput)}>Prihlasiť</Button>
+                    <Button color="blue" onClick={() => login(ws)}>Prihlasiť</Button>
                 </Grid>
                 <Text color="red" ref={pinError}></Text>
             </Card> : ""}
