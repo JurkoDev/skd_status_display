@@ -41,17 +41,23 @@ export default function PlaygroundPage() {
   // main class originaly "p-4 md:p-10 mx-auto max-w-7xl"
   return (
     <main className="p-4 md:p-10 mx-auto"> 
+      <div className="bg-red-500 text-white p-4">
+        <h1 className="text-center">Udaje nemusia byt platne</h1>
+      </div>
       <Grid numItemsSm={2} numItemsLg={4} className="gap-6">
         {places.map((item) => (data.filter(row => row.place === item.id).length === 0 ? "" :
           <Card key={item.category.toString()}>
             <Title>{item.category.toString()}</Title>
             <Flex className="mt-6">
               <Text>Trieda</Text>
-              <Text className="text-right">{item.id.toString() !== "trieda" ? "" : "Zvoniť"}</Text>
+              <Text className="text-right">{item.id.toString() == "trieda" || item.id.toString() == "herna" ? "Zvoniť" : ""}</Text>
             </Flex>
             <BarList
             /* eslint-disable */
               data={data.filter(row => row.place === item.id).map((row) => {
+                if (item.id.toString() == "herna") {
+                  return { name: row.name + " " + row.trieda, value: "č.1", color: row.color};
+                }
                 if (item.id.toString() !== "trieda") {
                   return { name: row.name + " " + row.trieda, value: "", color: row.color};
                 } else {
