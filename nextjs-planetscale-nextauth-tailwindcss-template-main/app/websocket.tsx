@@ -89,7 +89,7 @@ export function useWebSocket() {
     if (adminuser == true) {
       setState("user_select");
     } else {
-      userreset();
+      // userreset();
     }
   };
 
