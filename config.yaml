@@ -111,6 +111,9 @@ pin:
   - id: 9
     pin: 515259
     admin: false
+  - id: 13
+    pin: 152837
+    admin: false
 places:
   - category: Trieda
     id: trieda
