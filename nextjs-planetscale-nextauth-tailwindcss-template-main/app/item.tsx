@@ -36,7 +36,7 @@ export default function Item() {
                 <Title>Loading</Title>
             </Card> : ""}
             {state == "main" ? <Card className="mlectt-8">
-                <Title style={{ marginBottom: '16px' }}>Ahoj {user}</Title>
+                <Title style={{ marginBottom: '16px' }}>Ahoj {user} si v { data.find((item: Item | undefined) => item?.name === user)?.place as unknown as string}</Title>
 
                 <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
                     {places.map((item, index) => (
