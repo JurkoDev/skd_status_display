@@ -91,31 +91,40 @@ pin:
     pin: 616263
     admin: true
   - id: 3
-    pin: 515253
+    pin: 004
     admin: false
   - id: 4
-    pin: 515254
+    pin: 012
     admin: false
   - id: 5
-    pin: 141082
+    pin: 006
     admin: false
   - id: 6
-    pin: 515256
+    pin: 007
     admin: false 
   - id: 7
-    pin: 515257
+    pin: 001
     admin: false
   - id: 8
-    pin: 515258
+    pin: 003
     admin: false
   - id: 9
-    pin: 515159
+    pin: 010
+    admin: false
+  - id: 10
+    pin: 005
     admin: false
   - id: 11
-    pin: 7777
+    pin: 009
+    admin: false
+  - id: 12
+    pin: 002
     admin: false
   - id: 13
-    pin: 152837
+    pin: 011
+    admin: false
+  - id: 14
+    pin: 008
     admin: false
 places:
   - category: Trieda
