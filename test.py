@@ -124,6 +124,7 @@ async def youtube_dl_run(temp):
             if pin[i]["pin"] == int(temp["pin"]):
                 jsontemp["id"] = pin[i]["id"]
                 jsontemp["admin"] = pin[i]["admin"]
+                print(pin[i]["id"])
 
 
         # match temp["pin"]:
