@@ -40,9 +40,10 @@ export function useWebSocket() {
         } else {
           // find the dict in data where id eqauls message.id then set user to name
           data.forEach((i) => {
-            console.log(i);
+            // console.log(i);
             if (i.id == message.id) {
               setUser(i.name);
+              console.log("id: " + message.id);
               setUserid(message.id);
               setState("main");
             }
