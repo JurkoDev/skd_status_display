@@ -1,54 +1,54 @@
 data:
-  - id: 3
+  - id: 6
     value: č.10
     name: Brunclíková
     trieda: 1.D
     april:
     color: violet
     place: trieda
-  - id: 4
+  - id: 14
     value: č.9
     name: Komjatová
     trieda: 4.B,C
     april:
     color: amber
     place: trieda
-  - id: 5
+  - id: 8
     value: č.7
     name: Lehutová
     trieda: 2.B
     april: Pálenka
     color: purple
     place: trieda
-  - id: 6
+  - id: 9
     value: č.12
     name: Lenčéšová
     trieda: 2.C
     april:
     color: stone
     place: trieda 
-  - id: 7
+  - id: 3
     value: č.5
     name: Supeková
     trieda: 1.A
     april:
     color: yellow
     place: trieda
-  - id: 8
+  - id: 5
     value: č.6
     name: Turoci
     trieda: 1.C
     april:
     color: green
     place: trieda
-  - id: 9
+  - id: 12
     value: č.8
     name: Tureková
     trieda: 3.C
     april:
     color: pink
     place: trieda
-  - id: 10
+  - id: 7
     value: č.4
     name: Lomen
     trieda: 2.A
@@ -62,7 +62,7 @@ data:
     april: Šmikalova
     color: gray
     place: trieda
-  - id: 12
+  - id: 4
     value: č.11
     name: Slováková
     trieda: 1.B
@@ -76,7 +76,7 @@ data:
     april:
     color: sky
     place: trieda
-  - id: 14
+  - id: 10
     value: č.16
     name: Urbanová
     trieda: 3.A
@@ -91,40 +91,40 @@ pin:
     pin: 616263
     admin: true
   - id: 3
-    pin: 004
-    admin: false
-  - id: 4
-    pin: 012
-    admin: false
-  - id: 5
-    pin: 006
-    admin: false
-  - id: 6
-    pin: 007
-    admin: false 
-  - id: 7
     pin: 001
     admin: false
-  - id: 8
+  - id: 4
+    pin: 002
+    admin: false
+  - id: 5
     pin: 003
     admin: false
+  - id: 6
+    pin: 004
+    admin: false 
+  - id: 7
+    pin: 005
+    admin: false
+  - id: 8
+    pin: 006
+    admin: false
   - id: 9
-    pin: 010
+    pin: 007
     admin: false
   - id: 10
-    pin: 005
+    pin: 008
     admin: false
   - id: 11
     pin: 009
     admin: false
   - id: 12
-    pin: 002
+    pin: 010
     admin: false
   - id: 13
     pin: 011
     admin: false
   - id: 14
-    pin: 008
+    pin: 012
     admin: false
 places:
   - category: Trieda
