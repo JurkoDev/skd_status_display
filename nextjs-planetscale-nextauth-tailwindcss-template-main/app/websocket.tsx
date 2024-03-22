@@ -24,6 +24,7 @@ export function useWebSocket() {
   useEffect(() => {
     onmessage_handler.current = (event: { data: string; }) => {
       var message = JSON.parse(event.data);
+      console.log("ws received: " + event.data);
       if (message.command === "user_login_response") {
         // if id is not defined return
         if (message.id == null) {
