@@ -121,7 +121,7 @@ async def youtube_dl_run(temp):
 
         #get the id of the pin (var temp["pin"]) from var array pin
         for i in range(len(pin)):
-            if pin[i]["pin"] == int(temp["pin"]):
+            if pin[i]["pin"] == temp["pin"]:
                 jsontemp["id"] = pin[i]["id"]
                 jsontemp["admin"] = pin[i]["admin"]
                 print(pin[i]["id"])
