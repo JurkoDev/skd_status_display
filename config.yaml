@@ -115,7 +115,7 @@ pin:
     pin: "008"
     admin: false
   - id: 11
-    pin: "00S9"
+    pin: "009"
     admin: false
   - id: 12
     pin: 010
