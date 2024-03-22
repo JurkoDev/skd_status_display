@@ -91,25 +91,25 @@ pin:
     pin: 616263
     admin: true
   - id: 3
-    pin: 001
+    pin: "001"
     admin: false
   - id: 4
-    pin: 002
+    pin: "002"
     admin: false
   - id: 5
-    pin: 003
+    pin: "003"
     admin: false
   - id: 6
-    pin: 004
+    pin: "004"
     admin: false 
   - id: 7
-    pin: 005
+    pin: "005"
     admin: false
   - id: 8
-    pin: 006
+    pin: "006"
     admin: false
   - id: 9
-    pin: 007
+    pin: "007"
     admin: false
   - id: 10
     pin: "008"
@@ -118,13 +118,13 @@ pin:
     pin: "009"
     admin: false
   - id: 12
-    pin: 010
+    pin: "010"
     admin: false
   - id: 13
-    pin: 011
+    pin: "011"
     admin: false
   - id: 14
-    pin: 012
+    pin: "012"
     admin: false
 places:
   - category: Trieda
