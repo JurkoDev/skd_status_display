@@ -85,10 +85,10 @@ data:
     place: trieda
 pin:
   - id: 1
-    pin: 6162636465
+    pin: "6162636465"
     admin: true
   - id: 2
-    pin: 616263
+    pin: "616263"
     admin: true
   - id: 3
     pin: "001"
