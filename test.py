@@ -226,4 +226,3 @@ if __name__ == "__main__":
         asyncio.run_coroutine_threadsafe(main(), loop)
         schedule.run_pending()
         time.sleep(1)
-        print("loop")
