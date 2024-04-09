@@ -6,6 +6,8 @@ import asyncio
 import websockets
 import json
 import yaml
+import schedule
+import time
 
 # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 # localhost_pem = pathlib.Path(__file__).with_name("localhost.pem")
@@ -204,4 +206,24 @@ async def main():
 
 if __name__ == "__main__":
     print("starting server")
-    asyncio.run(main())
+    # Define a function to load the YAML file
+    def load_yaml():
+        with open('config.yaml', 'r', encoding='utf8',) as file:
+            global configuration, data, places, pin
+            configuration = yaml.safe_load(file)
+            data = configuration["data"]
+            places = configuration["places"]
+            pin = configuration["pin"]
+            print("yaml loaded")
+        pass
+
+    # Schedule the job to run every day at 18:00
+    schedule.every().day.at("18:00").do(load_yaml)
+    global loop
+    loop = asyncio.new_event_loop()
+    # Run the event loop
+    while True:
+        asyncio.run_coroutine_threadsafe(main(), loop)
+        schedule.run_pending()
+        time.sleep(1)
+        print("loop")
