@@ -5,7 +5,7 @@ import Nav from './nav';
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'ŠKD - Displej',
+  title: 'ŠKD - Monitor',
   description:
     'todo'
 };
