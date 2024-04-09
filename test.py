@@ -219,6 +219,7 @@ if __name__ == "__main__":
 
     # Schedule the job to run every day at 18:00
     schedule.every().day.at("18:00").do(load_yaml)
+    main()
     global loop
     loop = asyncio.new_event_loop()
     # Run the event loop
