@@ -12,7 +12,9 @@ async def reset():
         websocket.close()
         
         
-schedule.every().day.at("19:16").do(asyncio.run(reset()))
+reset_task = asyncio.create_task(reset())
+
+schedule.every().day.at("19:16").do(lambda: asyncio.ensure_future(reset_task))
 
 while True:
     schedule.run_pending()
