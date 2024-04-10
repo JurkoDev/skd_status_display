@@ -12,7 +12,7 @@ async def reset():
         websocket.close()
         
         
-schedule.every().day.at("19:16").do(asyncio.run_coroutine_threadsafe(reset))
+schedule.every().day.at("19:16").do(asyncio.run(reset))
 
 while True:
     schedule.run_pending()
