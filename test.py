@@ -195,6 +195,9 @@ async def youtube_dl_run(temp):
         jsontemp["data"] = data
         jsontemp["places"] = places
         websockets.broadcast(CLIENTS, json.dumps(jsontemp))
+    if temp["command"] == "load_config":
+        load_yaml()
+        jsontemp = json.loads('{"command":"load_config_response"}')
 
     # websockets.broadcast(CLIENTS, json.dumps(temp))
 
@@ -204,26 +207,16 @@ async def main():
     async with websockets.serve(echo, "0.0.0.0", 8765):
         await asyncio.Future()  # run forever
 
+
+def load_yaml():
+    with open('config.yaml', 'r', encoding='utf8',) as file:
+        global configuration, data, places, pin
+        configuration = yaml.safe_load(file)
+        data = configuration["data"]
+        places = configuration["places"]
+        pin = configuration["pin"]
+        print("yaml reloaded")
+    pass
 if __name__ == "__main__":
     print("starting server")
-    # Define a function to load the YAML file
-    def load_yaml():
-        with open('config.yaml', 'r', encoding='utf8',) as file:
-            global configuration, data, places, pin
-            configuration = yaml.safe_load(file)
-            data = configuration["data"]
-            places = configuration["places"]
-            pin = configuration["pin"]
-            print("yaml loaded")
-        pass
-
-    # Schedule the job to run every day at 18:00
-    schedule.every().day.at("18:00").do(load_yaml)
     asyncio.run(main())
-    global loop
-    loop = asyncio.new_event_loop()
-    # Run the event loop
-    while True:
-        asyncio.run_coroutine_threadsafe(main(), loop)
-        schedule.run_pending()
-        time.sleep(1)
