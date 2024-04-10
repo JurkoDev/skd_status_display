@@ -2,19 +2,22 @@ import websockets
 import asyncio
 import json
 import time
-import schedule
+import threading
 
-async def reset():
+def reset():
     uri = "ws://localhost:8765"
-    async with websockets.connect(uri) as websocket:
-        await websocket.send(json.dumps({"command": "load_config"}))
-        print(await websocket.recv())
-        websocket.close()
-        
-        
-reset_task = asyncio.create_task(reset())
+    async def reset_async():
+        async with websockets.connect(uri) as websocket:
+            await websocket.send(json.dumps({"command": "load_config"}))
+            print(await websocket.recv())
+            websocket.close()
+    
+    asyncio.run(reset_async())
 
-schedule.every().day.at("19:16").do(lambda: asyncio.ensure_future(reset_task))
+        
+        
+
+schedule.every().day.at("19:16").do(reset)
 
 while True:
     schedule.run_pending()
