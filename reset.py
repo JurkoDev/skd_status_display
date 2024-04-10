@@ -11,7 +11,7 @@ def reset():
         async with websockets.connect(uri) as websocket:
             await websocket.send(json.dumps({"command": "load_config"}))
             print(await websocket.recv())
-            websocket.close()
+            await websocket.close()
     
     asyncio.run(reset_async())
 
