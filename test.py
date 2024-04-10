@@ -198,6 +198,7 @@ async def youtube_dl_run(temp):
     if temp["command"] == "load_config":
         load_yaml()
         jsontemp = json.loads('{"command":"load_config_response"}')
+        websockets.broadcast(CLIENTS, json.dumps(jsontemp))
 
     # websockets.broadcast(CLIENTS, json.dumps(temp))
 
