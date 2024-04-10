@@ -18,7 +18,7 @@ def reset():
         
         
 
-schedule.every().day.at("19:32").do(reset)
+schedule.every().day.at("18:00").do(reset)
 
 while True:
     schedule.run_pending()
