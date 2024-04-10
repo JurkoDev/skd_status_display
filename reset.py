@@ -3,6 +3,7 @@ import asyncio
 import json
 import time
 import threading
+import schedule
 
 def reset():
     uri = "ws://localhost:8765"
@@ -17,7 +18,7 @@ def reset():
         
         
 
-schedule.every().day.at("19:16").do(reset)
+schedule.every().day.at("19:24").do(reset)
 
 while True:
     schedule.run_pending()
