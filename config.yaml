@@ -143,3 +143,5 @@ places:
     id: herna
   - category: Školská jedáleň
     id: jedalen
+  - category: Škola v prírode
+    id: svp
