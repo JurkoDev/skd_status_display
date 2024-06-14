@@ -3,6 +3,7 @@
 import { useState, useEffect, Requireable } from "react";
 import { Card, Metric, Text, Title, BarList, Flex, Grid, Color, ValueFormatter } from "@tremor/react";
 import { useWebSocket } from "./websocket";
+import FancyList from "./FancyList";
 
 // var data = [
 //   { value: "č.3", name: "Smikalova 2.B", april:"Šmikalova", color: "yellow", place: "trieda"},
@@ -40,7 +41,7 @@ export default function PlaygroundPage() {
   // data = datatemp;
   // main class originaly "p-4 md:p-10 mx-auto max-w-7xl"
   return (
-    <main className="p-4 md:p-10 mx-auto"> 
+    <main className="p-4 md:p-10 mx-auto">
       <div className="bg-red-500 text-white p-4">
         <h1 className="text-center">Testovacia prevádzka: Údaje nemusia byť správne</h1>
       </div>
@@ -52,21 +53,16 @@ export default function PlaygroundPage() {
               <Text></Text>
               <Text className="text-right">{item.id.toString() == "trieda" || item.id.toString() == "herna" ? "Zvoniť" : ""}</Text>
             </Flex>
-            <BarList
-            /* eslint-disable */
-              data={data.filter(row => row.place === item.id).map((row) => {
-                if (item.id.toString() == "herna") {
-                  return { name: row.name + " " + row.trieda, value: "č.1", color: row.color};
-                }
-                if (item.id.toString() !== "trieda") {
-                  return { name: row.name + " " + row.trieda, value: "", color: row.color};
-                } else {
-                  return { name: row.name + " " + row.trieda, value: row.value, color: row.color};
-                }
-              })}
-              className="mt-2"
-            /* eslint-enable */
-            />
+            <FancyList data={data.filter(row => row.place === item.id).map((row) => {
+              if (item.id.toString() == "herna") {
+                return { name: row.name, trieda: row.trieda, value: "č.1", color: row.color, id: row.id };
+              }
+              if (item.id.toString() !== "trieda") {
+                return { name: row.name, trieda: row.trieda, value: "", color: row.color, id: row.id };
+              } else {
+                return { name: row.name, trieda: row.trieda, value: row.value, color: row.color, id: row.id };
+              }
+            })} />
           </Card>
         ))}
       </Grid>
