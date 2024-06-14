@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Text, Title, SearchSelect, SearchSelectItem, Table, TableHead, TableRow, TableHeaderCell, TableBody, Grid, Button, TextInput, Color } from "@tremor/react";
+import { Card, Text, Title, Grid, Button, TextInput, Color, Switch } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { useWebSocket } from "./websocket";
 import React from "react";
@@ -18,6 +18,7 @@ var ws: WebSocket;
 export const pinError = React.createRef<HTMLParagraphElement>();
 export const customMessage = React.createRef<HTMLInputElement>();
 export const pinInput = React.createRef<HTMLInputElement>();
+export const savepin = React.createRef<HTMLInputElement>();
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket } = useWebSocket();
 
@@ -51,10 +52,18 @@ export default function Item() {
             </Card> : ""}
             {state == "login" ? <Card className="mlectt-8">
                 <Title style={{ marginBottom: '16px' }}>prihlas sa</Title>
-                <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
+                <Grid numItemsSm={2} numItemsLg={2} className="gap-6 py-2">
                     <TextInput type="text" ref={pinInput} />
                     <Button color="blue" onClick={() => login(ws)}>Prihlasiť</Button>
                 </Grid>
+                <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                    <div style={{ display: "inline-block" }}>
+                    <Switch color="blue" ref={savepin}/>
+                    </div>
+                    <div style={{ display: "inline-block" }}>
+                    <Text>Zostať Prihlasený</Text>
+                    </div>
+                </div>
                 <Text color="red" ref={pinError}></Text>
             </Card> : ""}
             {state == "user_select" ? <div>
@@ -68,7 +77,7 @@ export default function Item() {
                     </Grid>
                 </Card>
             </div> : ""}
-            <Button color="red" onClick={() => userreset()}>reset</Button>
+            <Button color="red" onClick={() => userreset()}>odhlásiť</Button>
         </div >
     );
 }

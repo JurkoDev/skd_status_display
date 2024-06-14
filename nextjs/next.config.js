@@ -4,7 +4,6 @@ const nextConfig = {
     domains: ['avatars.githubusercontent.com']
   },
   experimental: {
-    serverComponentsExternalPackages: ['@tremor/react']
   },
   typescript: {
     // !! WARN !!

@@ -1,9 +1,8 @@
 'use client';
 
-import { v4 as uuidv4 } from 'uuid';
-import { unsubscribe } from "diagnostics_channel";
-import { any, element, number, string } from "prop-types";
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';;
+import { number, string } from "prop-types";
+import { useEffect, useRef, useState } from "react";
 import { customMessage, pinError, pinInput } from './item';
 
 export function useWebSocket() {
@@ -65,6 +64,14 @@ export function useWebSocket() {
       ws.send(JSON.stringify({ command: "data" }));
       console.log("connected");
       setState("login");
+      const loginPassToken = localStorage.getItem("login_pass");
+      console.warn(loginPassToken);
+      if (loginPassToken != null) {
+        setTimeout(() => {
+          ws.send(JSON.stringify({ command: "user_login", "pin": loginPassToken, "session": uuid }));
+          console.warn("login pass token")
+        }, 100);
+      }
     };
     ws.addEventListener("message", (event) => {
       onmessage_handler.current(event);
@@ -96,13 +103,16 @@ export function useWebSocket() {
   };
 
   const login = (ws: any) => {
-    ws.send(JSON.stringify({ command: "user_login", "pin": pinInput.current.value, "session": session }));
+    const pin = pinInput.current.value;
+    ws.send(JSON.stringify({ command: "user_login", "pin": pin, "session": session }));
+    localStorage.setItem("login_pass", pin);
   };
 
   const userreset = () => {
     setUser("");
     setAdminuser(false);
     setState("login");
+    localStorage.removeItem("login_pass");
   };
 
   const registerCustomPlace = (ws: any, userid: any) => {	
