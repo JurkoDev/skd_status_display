@@ -3,7 +3,7 @@
 import { v4 as uuidv4 } from 'uuid';;
 import { number, string } from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import { customMessage, pinError, pinInput } from './item';
+import { customMessage, pinError, pinInput, savepin } from './item';
 
 export function useWebSocket() {
 
@@ -103,9 +103,11 @@ export function useWebSocket() {
   };
 
   const login = (ws: any) => {
-    const pin = pinInput.current.value;
+    const pin = pinInput.current?.value;
     ws.send(JSON.stringify({ command: "user_login", "pin": pin, "session": session }));
-    localStorage.setItem("login_pass", pin);
+    if (savepin == true) {
+      localStorage.setItem("login_pass", pin);
+    }
   };
 
   const userreset = () => {

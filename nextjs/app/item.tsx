@@ -18,7 +18,7 @@ var ws: WebSocket;
 export const pinError = React.createRef<HTMLParagraphElement>();
 export const customMessage = React.createRef<HTMLInputElement>();
 export const pinInput = React.createRef<HTMLInputElement>();
-export const savepin = React.createRef<HTMLInputElement>();
+export var savepin = false;
 export default function Item() {
     const {ws, setWs, data, places, state, setState, user, setUser, userid, setUserid, adminuser, setAdminuser, userselectclick, dataupdate, login, userreset, onmessage_handler, registerCustomPlace, connectWebSocket } = useWebSocket();
 
@@ -58,7 +58,7 @@ export default function Item() {
                 </Grid>
                 <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                     <div style={{ display: "inline-block" }}>
-                    <Switch color="blue" ref={savepin}/>
+                    <Switch color="blue" checked={savepin} onChange={(value) => (savepin = value)}/>
                     </div>
                     <div style={{ display: "inline-block" }}>
                     <Text>Zostať Prihlasený</Text>
